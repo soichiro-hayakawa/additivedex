@@ -45,12 +45,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .pg{display:none;padding:16px;position:relative;z-index:1}
 .pg.on{display:block}
 
-/* APIキー */
-.key-row{display:flex;gap:8px;align-items:center;margin-bottom:14px;background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:10px 14px}
-.key-row .k-ic{font-size:20px;flex-shrink:0}
-.key-row input{flex:1;background:none;border:none;font-size:12px;color:var(--txt);font-family:monospace;outline:none;min-width:0}
-.key-row input::placeholder{color:var(--dim)}
-.key-save{background:var(--acc);color:#000;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;-webkit-appearance:none}
 
 /* Scan area */
 .scan-label{display:block;background:var(--sur);border:2px dashed var(--bdr);border-radius:16px;padding:44px 20px;text-align:center;cursor:pointer;margin-bottom:16px;-webkit-user-select:none;user-select:none}
@@ -200,13 +194,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <!-- SCAN -->
 <div class="pg on" id="pg-scan">
-
-  <div class="key-row">
-    <div class="k-ic">🔑</div>
-    <input type="password" id="apiKey" placeholder="APIキーを入力（sk-ant-...）" autocomplete="off">
-    <button class="key-save" id="keySave">保存</button>
-  </div>
-  <div id="keyStatus" style="font-size:11px;color:var(--dim);margin-bottom:14px;margin-top:-8px;padding-left:4px"></div>
 
   <label class="scan-label" id="scanLabel">
     <input type="file" id="fileIn" accept="image/*">
@@ -362,8 +349,7 @@ var ST={
   col:JSON.parse(localStorage.getItem("adx4_col")||"{}"),
   sc:parseInt(localStorage.getItem("adx4_sc")||"0"),
   ach:JSON.parse(localStorage.getItem("adx4_ach")||"[]"),
-  cf:"all",
-  key:localStorage.getItem("adx4_key")||""
+  cf:"all"
 };
 
 function save(){
@@ -374,17 +360,6 @@ function save(){
   document.getElementById("hColl").textContent=Object.keys(ST.col).length;
 }
 
-// APIキー管理
-var keyInp=document.getElementById("apiKey");
-if(ST.key){keyInp.value=ST.key;document.getElementById("keyStatus").textContent="✅ APIキーが保存されています"}
-document.getElementById("keySave").addEventListener("click",function(){
-  var v=keyInp.value.trim();
-  if(!v){document.getElementById("keyStatus").textContent="⚠️ APIキーを入力してください";return}
-  ST.key=v;
-  localStorage.setItem("adx4_key",v);
-  document.getElementById("keyStatus").textContent="✅ 保存しました";
-  toast("🔑","APIキーを保存しました","次回から自動入力されます");
-});
 
 // ── ナビゲーション ──
 function showPage(p){
@@ -465,8 +440,6 @@ document.getElementById("btnDex").addEventListener("click",function(){showPage("
 
 // ── 解析 ──
 document.getElementById("btnAnalyze").addEventListener("click",function(){
-  var key=ST.key||keyInp.value.trim();
-  if(!key){toast("🔑","APIキーが必要です","画面上部にAPIキーを入力して「保存」してください",true);return}
   if(!imgB64){toast("📷","写真がありません","先に写真を選択してください",true);return}
   prevWrap.style.display="none";
   document.getElementById("loadWrap").style.display="block";
@@ -479,7 +452,7 @@ document.getElementById("btnAnalyze").addEventListener("click",function(){
     DB.map(function(a){return"- "+a.name+"（id: "+a.id+"）"}).join("\n")+
     "\n\nJSONのみで返答（余計な文字・マークダウン不要）：\n{\"raw_ingredients\":\"テキスト\",\"detected_additives\":[\"id1\"],\"notes\":\"\"}";
 
-  fetch("https://api.anthropic.com/v1/messages",{
+  fetch("https://additivedex-api.vercel.app/api/chat",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
