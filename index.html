@@ -21,7 +21,7 @@ body{
   background:var(--bg);color:var(--txt);
   min-height:100vh;
   padding-top:60px;
-  padding-bottom:90px;
+  padding-bottom:calc(90px + env(safe-area-inset-bottom,0px));
 }
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:36px 36px;pointer-events:none;z-index:0}
 
@@ -35,13 +35,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .hs .l{font-size:10px;color:var(--dim)}
 
 /* Nav */
-#nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(10,14,26,.98);border-top:1px solid var(--bdr);display:flex}
-.nb{flex:1;background:none;border:none;color:var(--dim);padding:8px 2px 10px;font-size:9px;font-family:'Noto Sans JP',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;-webkit-appearance:none;min-height:52px}
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(10,14,26,.98);border-top:1px solid var(--bdr);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+.nb{flex:1;background:none;border:none;color:var(--dim);padding:8px 2px 10px;font-size:9px;font-family:'Noto Sans JP',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;-webkit-appearance:none;min-height:52px;touch-action:manipulation}
 .nb .ic{font-size:18px;line-height:1.2}
 .nb.on{color:var(--acc);font-weight:700}
 
 /* Disclaimer */
-#disclaimer{position:fixed;bottom:52px;left:0;right:0;z-index:49;background:rgba(10,14,26,.97);border-top:1px solid rgba(30,58,95,.6);padding:5px 16px 5px;font-size:10px;color:var(--dim);text-align:center;line-height:1.5}
+#disclaimer{position:fixed;bottom:calc(52px + env(safe-area-inset-bottom,0px));left:0;right:0;z-index:49;background:rgba(10,14,26,.97);border-top:1px solid rgba(30,58,95,.6);padding:5px 16px 5px;font-size:10px;color:var(--dim);text-align:center;line-height:1.5}
 
 /* Pages */
 .pg{display:none;padding:16px;position:relative;z-index:1}
@@ -189,6 +189,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 @keyframes to2{from{opacity:1}to{opacity:0}}
 .tic{font-size:22px}.ttl{font-size:13px;font-weight:700;margin-bottom:1px}.tsb{font-size:11px;color:var(--dim)}
 
+/* Back / Close buttons */
+.btn-back{display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--bdr);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--dim);font-family:'Noto Sans JP',sans-serif;cursor:pointer;-webkit-appearance:none;margin-bottom:14px;touch-action:manipulation}
+.btn-back:active{opacity:.6}
+.btn-close{width:100%;display:block;background:var(--sur2);border:1px solid var(--bdr);border-radius:10px;padding:13px 16px;font-size:14px;font-weight:700;color:var(--txt);font-family:'Noto Sans JP',sans-serif;cursor:pointer;-webkit-appearance:none;text-align:center;margin-top:16px;touch-action:manipulation}
+.btn-close:active{opacity:.6}
+
 /* Profile */
 .prof-opts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
 .prof-opt{background:var(--sur);border:1px solid var(--bdr);border-radius:20px;padding:7px 16px;font-size:13px;color:var(--dim);font-family:'Noto Sans JP',sans-serif;cursor:pointer;-webkit-appearance:none}
@@ -234,6 +240,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <div id="resWrap" style="display:none">
+    <button class="btn-back" id="btnBack">← スキャンに戻る</button>
     <div class="ib" id="ingrBox"></div>
     <div class="sum-grid">
       <div class="sc"><div class="sv sv-t" id="sT">0</div><div class="sl">検出数</div></div>
@@ -324,6 +331,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="dbi" style="border-color:rgba(0,212,255,.2)">
     <p style="color:var(--dim)">タップで選択・解除できます。設定内容はスキャン後の結果画面に反映されます。</p>
   </div>
+  <button class="btn btn-p" id="btnProfDone" style="margin-top:4px">✓ 完了してスキャンへ</button>
 </div>
 
 <!-- NAV -->
@@ -338,7 +346,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div id="disclaimer">本アプリは医療アドバイスを提供しません。個別の健康判断は医師にご相談ください。</div>
 
 <!-- MODAL -->
-<div class="mbg" id="mbg"><div class="mod"><div class="mh"></div><div id="mbd"></div></div></div>
+<div class="mbg" id="mbg"><div class="mod"><div class="mh"></div><div id="mbd"></div><button class="btn-close" id="btnModalClose">閉じる</button></div></div>
 
 <script>
 var DB=[
@@ -499,10 +507,7 @@ var navBtns=[
 navBtns.forEach(function(nb){
   var el=document.getElementById(nb.id);
   var p=nb.page;
-  el.addEventListener("touchstart",function(e){
-    e.preventDefault();
-    showPage(p);
-  },{passive:false});
+  // touch-action:manipulation で300ms遅延を排除。touchstartは使わない（スクロール中誤タップ防止）
   el.addEventListener("click",function(){showPage(p)});
 });
 
@@ -996,10 +1001,27 @@ document.querySelectorAll("#po-flags .prof-opt").forEach(function(btn){
   });
 });
 
+// ── 戻る / 閉じるボタン ──
+document.getElementById("btnBack").addEventListener("click",resetScan);
+document.getElementById("btnModalClose").addEventListener("click",function(){
+  document.getElementById("mbg").classList.remove("o");
+});
+document.getElementById("btnProfDone").addEventListener("click",function(){
+  showPage("scan");
+});
+
 // Init
 save();
 renderData();
 renderProf();
+
+// 初回起動ヒント（1回のみ）
+if(!localStorage.getItem("adx4_inited")){
+  localStorage.setItem("adx4_inited","1");
+  setTimeout(function(){
+    toast("⚙️","ようこそ AdditiveDEX へ","まず「設定」タブでプロフィールを入力してください");
+  },900);
+}
 </script>
 </body>
 </html>
