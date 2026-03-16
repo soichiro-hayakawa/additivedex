@@ -20,9 +20,8 @@ body{
   font-family:'Noto Sans JP',sans-serif;
   background:var(--bg);color:var(--txt);
   min-height:100vh;
-  /* iOSでposition:fixedが効かない問題の回避 */
   padding-top:60px;
-  padding-bottom:70px;
+  padding-bottom:90px;
 }
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:36px 36px;pointer-events:none;z-index:0}
 
@@ -37,14 +36,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* Nav */
 #nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(10,14,26,.98);border-top:1px solid var(--bdr);display:flex}
-.nb{flex:1;background:none;border:none;color:var(--dim);padding:10px 4px 12px;font-size:10px;font-family:'Noto Sans JP',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;-webkit-appearance:none;min-height:54px}
-.nb .ic{font-size:20px;line-height:1.2}
+.nb{flex:1;background:none;border:none;color:var(--dim);padding:8px 2px 10px;font-size:9px;font-family:'Noto Sans JP',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;-webkit-appearance:none;min-height:52px}
+.nb .ic{font-size:18px;line-height:1.2}
 .nb.on{color:var(--acc);font-weight:700}
+
+/* Disclaimer */
+#disclaimer{position:fixed;bottom:52px;left:0;right:0;z-index:49;background:rgba(10,14,26,.97);border-top:1px solid rgba(30,58,95,.6);padding:5px 16px 5px;font-size:10px;color:var(--dim);text-align:center;line-height:1.5}
 
 /* Pages */
 .pg{display:none;padding:16px;position:relative;z-index:1}
 .pg.on{display:block}
-
 
 /* Scan area */
 .scan-label{display:block;background:var(--sur);border:2px dashed var(--bdr);border-radius:16px;padding:44px 20px;text-align:center;cursor:pointer;margin-bottom:16px;-webkit-user-select:none;user-select:none}
@@ -53,7 +54,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .sd-ic{font-size:52px;margin-bottom:12px;display:block}
 .sd-t{font-size:15px;color:var(--dim);line-height:1.7}
 .sd-s{font-size:12px;color:var(--dim);opacity:.6;margin-top:6px}
-
 .preview-img{width:100%;max-height:200px;object-fit:cover;border-radius:14px;display:block;margin-bottom:10px;border:1px solid var(--bdr)}
 .btn{background:var(--sur2);border:1px solid var(--bdr);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--txt);font-family:'Noto Sans JP',sans-serif;cursor:pointer;-webkit-appearance:none;width:100%;display:block;text-align:center;margin-bottom:8px}
 .btn:active{opacity:.6}
@@ -81,6 +81,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .pb{height:8px;background:var(--sur2);border-radius:4px;overflow:hidden}
 .pf{height:100%;border-radius:4px;transition:width .8s ease}
 .pfh{background:var(--warn)}.pfm{background:var(--yel)}.pfl{background:var(--ok)}
+
+/* Warning / Combo cards */
+#warnWrap{margin-bottom:4px}
+.warn-card{background:rgba(255,59,92,.08);border:1px solid rgba(255,59,92,.3);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+.warn-hd{font-size:12px;font-weight:700;color:var(--warn);margin-bottom:4px}
+.warn-body{font-size:11px;line-height:1.7;color:var(--dim)}
+.combo-card{background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.3);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+.combo-hd{font-size:12px;font-weight:700;color:var(--acc2);margin-bottom:4px}
 
 /* Additive cards */
 .al{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
@@ -170,6 +178,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .ml{font-size:10px;color:var(--dim)}
 .ft{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .ftg{background:var(--sur2);border-radius:20px;font-size:11px;padding:3px 10px;color:var(--dim)}
+.mech-lbl{font-size:11px;font-weight:700;color:var(--acc);letter-spacing:.5px;margin:12px 0 5px}
+.mech-box{background:var(--sur2);border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.75;color:var(--dim)}
 
 /* Toast */
 .tw{position:fixed;top:68px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:448px;z-index:300;pointer-events:none}
@@ -178,6 +188,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 @keyframes ti{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes to2{from{opacity:1}to{opacity:0}}
 .tic{font-size:22px}.ttl{font-size:13px;font-weight:700;margin-bottom:1px}.tsb{font-size:11px;color:var(--dim)}
+
+/* Profile */
+.prof-opts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.prof-opt{background:var(--sur);border:1px solid var(--bdr);border-radius:20px;padding:7px 16px;font-size:13px;color:var(--dim);font-family:'Noto Sans JP',sans-serif;cursor:pointer;-webkit-appearance:none}
+.prof-opt:active{opacity:.6}
+.prof-opt.on{background:rgba(0,212,255,.12);border-color:var(--acc);color:var(--acc);font-weight:700}
 </style>
 </head>
 <body>
@@ -228,6 +244,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="rl"><span>総合リスクスコア</span><span class="rs" id="rsT">低リスク — 0/100</span></div>
       <div class="pb"><div id="rsF" class="pf pfl" style="width:0%"></div></div>
     </div>
+    <div id="warnWrap"></div>
     <div class="al" id="adList"></div>
     <div class="btn-row">
       <button class="btn" id="btnRescan">再スキャン</button>
@@ -277,49 +294,144 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div style="height:8px"></div>
 </div>
 
+<!-- PROF -->
+<div class="pg" id="pg-prof">
+  <div class="dbi">
+    <h3>プロフィール設定</h3>
+    <p>スキャン結果にパーソナライズ警告を表示します。入力情報はこのデバイス内にのみ保存され、外部には一切送信されません。</p>
+  </div>
+  <div class="stl">持病</div>
+  <div class="prof-opts" id="po-cond">
+    <button class="prof-opt" data-val="kidney">腎臓病</button>
+    <button class="prof-opt" data-val="diabetes">糖尿病</button>
+    <button class="prof-opt" data-val="hypertension">高血圧</button>
+  </div>
+  <div style="height:18px"></div>
+  <div class="stl">アレルギー</div>
+  <div class="prof-opts" id="po-allergy">
+    <button class="prof-opt" data-val="soy">大豆</button>
+    <button class="prof-opt" data-val="egg">卵</button>
+    <button class="prof-opt" data-val="wheat">小麦</button>
+  </div>
+  <div style="height:18px"></div>
+  <div class="stl">その他</div>
+  <div class="prof-opts" id="po-flags">
+    <button class="prof-opt" data-val="pregnant">妊娠中</button>
+    <button class="prof-opt" data-val="nursing">授乳中</button>
+    <button class="prof-opt" data-val="child">子ども向け</button>
+  </div>
+  <div style="height:18px"></div>
+  <div class="dbi" style="border-color:rgba(0,212,255,.2)">
+    <p style="color:var(--dim)">タップで選択・解除できます。設定内容はスキャン後の結果画面に反映されます。</p>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav id="nav">
   <button class="nb on" id="nb-scan"><span class="ic">📷</span>スキャン</button>
   <button class="nb" id="nb-dex"><span class="ic">📚</span>図鑑</button>
   <button class="nb" id="nb-ach"><span class="ic">🏆</span>実績</button>
   <button class="nb" id="nb-data"><span class="ic">🗄️</span>データ</button>
+  <button class="nb" id="nb-prof"><span class="ic">⚙️</span>設定</button>
 </nav>
+
+<div id="disclaimer">本アプリは医療アドバイスを提供しません。個別の健康判断は医師にご相談ください。</div>
 
 <!-- MODAL -->
 <div class="mbg" id="mbg"><div class="mod"><div class="mh"></div><div id="mbd"></div></div></div>
 
 <script>
 var DB=[
-  {id:"tartrazine",name:"タール色素（黄色4号）",em:"🟡",cat:"合成着色料",risk:"high",freq:2,desc:"石炭タール由来の合成着色料。EUでは子どもへの影響に関する注意表示義務あり（規則EC No.1333/2008）。",c:["過活動症との関連（EFSA 2008年評価）","アレルギー反応（アスピリン感受性者）","ADI: 7.5 mg/kg体重/日（JECFA設定）"],src:["食品安全委員会 添加物評価書","EFSA ANS Panel (2009)"],food:["菓子","清涼飲料水","漬物"]},
-  {id:"sunset_yellow",name:"タール色素（黄色5号）",em:"🧡",cat:"合成着色料",risk:"high",freq:2,desc:"サンセットイエローFCF。EU規制では6種合成色素の1つとして子どもの多動との関連が示唆され表示義務あり。",c:["過活動との関連（McCann et al. 2007, Lancet）","アレルギー反応","ADI: 4 mg/kg体重/日（JECFA）"],src:["Lancet 2007;370:1560-1567","EFSA評価書"],food:["菓子","清涼飲料水"]},
-  {id:"sodium_nitrite",name:"亜硝酸Na（亜硝酸ナトリウム）",em:"🔴",cat:"発色剤",risk:"high",freq:5,desc:"ハム・ソーセージなどの発色とボツリヌス菌抑制に使用。IARCはニトロソアミン類をグループ2Aに分類。",c:["ニトロソアミン生成の可能性（IARC分類）","乳幼児のメトヘモグロビン血症リスク","使用基準: 食肉製品70mg/kg以下（日本）"],src:["IARC Monographs Vol.94","食品添加物公定書第10版"],food:["ハム","ソーセージ","ベーコン","魚肉練製品"]},
-  {id:"saccharin",name:"サッカリンNa",em:"🍬",cat:"甘味料",risk:"high",freq:3,desc:"人工甘味料。過去に膀胱がんとの関連報告。現在のJECFA評価では使用量基準内で許容。高摂取量での影響は継続評価中。",c:["動物実験での膀胱がん報告（高用量）","ADI: 5 mg/kg体重/日（JECFA）","乳幼児・妊婦での使用は避けることを推奨"],src:["JECFA評価 (2017)","食品安全委員会評価書"],food:["清涼飲料水","菓子","漬物"]},
-  {id:"bha",name:"BHA（ブチルヒドロキシアニソール）",em:"🟠",cat:"酸化防止剤",risk:"high",freq:2,desc:"油脂の酸化防止に使用される合成酸化防止剤。IARCはグループ2B（ヒトへの発がん性の可能性）に分類。",c:["IARCグループ2B（ヒトへの発がん性の可能性）","動物実験での前胃腫瘍","ADI: 0.5 mg/kg体重/日（JECFA）"],src:["IARC Monographs Vol.40","食品添加物公定書第10版"],food:["バター","チューインガム","食用油脂"]},
-  {id:"aspartame",name:"アスパルテーム",em:"💜",cat:"甘味料",risk:"mid",freq:8,desc:"フェニルアラニンを含む人工甘味料。PKU患者は摂取禁忌。2023年IARCがグループ2B分類。JECFAはADIを維持（40mg/kg体重/日）。",c:["PKU患者には禁忌（フェニルアラニン含有）","IARCグループ2B分類（2023年）","ADI: 40 mg/kg体重/日（JECFA維持）"],src:["IARC Monographs (2023)","JECFA評価 (2023)"],food:["清涼飲料水","ガム","デザート","卓上甘味料"]},
-  {id:"msg",name:"グルタミン酸Na（MSG）",em:"🧂",cat:"調味料",risk:"mid",freq:9,desc:"うま味調味料として広く使用。JECFAはADIを「特定せず」と評価。一部の個人でMSG過敏症の報告がある。",c:["MSG過敏症（一部の個人）：頭痛・紅潮","高摂取時の過食誘発の可能性","JECFAは通常量での安全性を認定"],src:["JECFA評価 (1988)","食品安全委員会"],food:["加工食品全般","スナック","インスタント麺"]},
-  {id:"carrageenan",name:"カラギーナン",em:"🟤",cat:"増粘安定剤",risk:"mid",freq:6,desc:"海藻由来の増粘剤。動物実験での腸管炎症が報告されているが、食品グレードと実験用分解型は品質が異なる。",c:["動物実験での腸管炎症（高用量・分解型）","炎症性腸疾患患者への影響の可能性","食品グレードはJECFAが使用許可維持"],src:["IARC Monographs Vol.31","JECFA評価"],food:["乳製品","ゼリー","ドレッシング","ハム"]},
-  {id:"acesulfame_k",name:"アセスルファムK",em:"💛",cat:"甘味料",risk:"mid",freq:7,desc:"ノンカロリー人工甘味料。動物実験では甲状腺・肝臓への影響が報告されているが、通常摂取量での有害性は未確立。",c:["動物実験での甲状腺・肝臓影響（高用量）","腸内細菌叢への影響（研究段階）","ADI: 15 mg/kg体重/日（JECFA）"],src:["JECFA評価","EFSA評価 (2000)"],food:["清涼飲料水","菓子","デザート"]},
-  {id:"tbhq",name:"TBHQ（ターシャリブチルヒドロキノン）",em:"🟥",cat:"酸化防止剤",risk:"mid",freq:3,desc:"油脂食品の酸化防止剤。動物実験での前胃腫瘍・DNA損傷が報告。JECFAは使用基準内での安全性を認定。",c:["動物実験での前胃腫瘍・DNA損傷","ADI: 0.7 mg/kg体重/日（JECFA）","日本では一部用途に使用基準設定"],src:["JECFA評価","食品添加物公定書第10版"],food:["即席麺","ポテトチップス","植物油脂"]},
-  {id:"sodium_benzoate",name:"安息香酸Na",em:"🔵",cat:"保存料",risk:"mid",freq:5,desc:"清涼飲料水などの防腐剤。ビタミンCと共存するとベンゼン（発がん性物質）を生成することが報告されている。",c:["ビタミンCとの共存でベンゼン生成の可能性","子どもの過活動との関連（McCann 2007）","ADI: 5 mg/kg体重/日（JECFA）"],src:["WHO Water Sanitation Health (2005)","食品安全委員会評価書"],food:["清涼飲料水","果汁飲料","醤油"]},
-  {id:"red40",name:"タール色素（赤色40号）",em:"❤️",cat:"合成着色料",risk:"mid",freq:3,desc:"合成赤色着色料。EUの6種合成色素の1つとして子どもの多動との関連が報告。日本でも食品安全委員会が評価実施済み。",c:["子どもの多動との関連（McCann 2007）","ADI: 7 mg/kg体重/日（JECFA）","アレルギー反応の報告"],src:["Lancet 2007","EFSA評価"],food:["菓子","清涼飲料水","漬物"]},
-  {id:"phosphate",name:"リン酸塩類",em:"🔶",cat:"結着剤・pH調整剤",risk:"mid",freq:9,desc:"多種のリン酸塩が食品添加物として使用される。腎臓病患者では血管石灰化・死亡リスクとの関連が報告されている。",c:["腎疾患患者での高リン血症リスク","カルシウム吸収阻害（高摂取量）","血管石灰化との関連（腎疾患患者）"],src:["KDIGO CKD-MBD Guideline","食品安全委員会"],food:["ハム","ソーセージ","チーズ","インスタント麺"]},
-  {id:"potassium_sorbate",name:"ソルビン酸K",em:"🟢",cat:"保存料",risk:"mid",freq:7,desc:"広く使用される保存料。JECFA評価では一般的な摂取量での安全性を認定。亜硝酸塩との反応物の変異原性が試験管内で報告されているが食品中での意義は不明。",c:["亜硝酸塩との反応物の変異原性（試験管内）","アレルギー反応の報告（まれ）","ADI: 25 mg/kg体重/日（JECFA）"],src:["JECFA評価","食品安全委員会"],food:["チーズ","清涼飲料水","果実加工品","菓子"]},
-  {id:"red3",name:"タール色素（赤色3号）",em:"🍒",cat:"合成着色料",risk:"mid",freq:2,desc:"エリスロシン。米国FDAは2024年1月に食肉・缶詰以外への使用禁止を決定（動物実験での甲状腺腫瘍による）。",c:["FDAが2024年に禁止（食肉・缶詰製品を除く）","動物実験での甲状腺腫瘍","ADI: 0.1 mg/kg体重/日（JECFA）"],src:["FDA 2024年1月決定","JECFA評価"],food:["菓子","清涼飲料水","漬物"]},
-  {id:"vitamin_c",name:"ビタミンC（L-アスコルビン酸）",em:"🍊",cat:"酸化防止剤",risk:"low",freq:9,desc:"天然由来の酸化防止剤。JECFAはADIを「特定せず」に分類。食品添加物としての使用量は安全範囲内。",c:["極端な過剰摂取での下痢・腎結石（食品添加物量では問題なし）"],src:["JECFA評価"],food:["幅広い加工食品","飲料"]},
-  {id:"lecithin",name:"レシチン（大豆・卵黄）",em:"🫘",cat:"乳化剤",risk:"low",freq:9,desc:"天然由来の乳化剤。JECFAはADIを「特定せず」に分類。大豆アレルギーの方は大豆レシチン含有製品に注意。",c:["大豆アレルギー患者での反応（大豆レシチン）"],src:["JECFA評価"],food:["チョコレート","マーガリン","アイスクリーム","パン"]},
-  {id:"caramel",name:"カラメル色素",em:"🟫",cat:"着色料",risk:"low",freq:9,desc:"糖質の加熱により製造される褐色着色料。カラメルIVに含まれる4-MEIについてIARCがグループ2B分類。通常使用量でJECFAは問題なしと評価。",c:["カラメルIVに含まれる4-MEI（IARCグループ2B）","ADI: 200 mg/kg体重/日（カラメルIV、JECFA）"],src:["IARC (2012)","JECFA評価"],food:["コーラ","醤油","ソース","菓子"]},
-  {id:"glycine",name:"グリシン",em:"💚",cat:"調味料・保存料",risk:"low",freq:6,desc:"アミノ酸の一種。甘味・保存効果のために使用。JECFAはADIを「特定せず」に分類。人体の構成成分でもある。",c:["通常の食品使用量での問題はなし"],src:["JECFA評価"],food:["弁当","惣菜","練り製品"]},
-  {id:"tocopherol",name:"ビタミンE（トコフェロール）",em:"🌿",cat:"酸化防止剤",risk:"low",freq:7,desc:"天然由来の酸化防止剤。JECFAはADIを「特定せず」に分類。食品添加物としての使用量は安全範囲内。",c:["通常の食品使用量での問題はなし"],src:["JECFA評価"],food:["油脂製品","マーガリン","乳製品"]},
-  {id:"citric_acid",name:"クエン酸",em:"🍋",cat:"酸味料・保存料",risk:"low",freq:9,desc:"果実などに天然に存在する有機酸。JECFAはADIを「特定せず」に分類。極端な過剰摂取では歯のエナメル質への影響があるが食品添加物量では問題なし。",c:["極端な過剰摂取での歯のエナメル質への影響"],src:["JECFA評価"],food:["幅広い加工食品"]},
-  {id:"xanthan",name:"キサンタンガム",em:"🌊",cat:"増粘安定剤",risk:"low",freq:7,desc:"微生物産生の多糖類。JECFAはADIを「特定せず」に分類。ごく一部の個人でアレルギー反応の報告がある。",c:["ごく一部での消化器症状（高摂取量）"],src:["JECFA評価"],food:["ドレッシング","ジュース","アイスクリーム"]},
-  {id:"bht",name:"BHT（ジブチルヒドロキシトルエン）",em:"🌕",cat:"酸化防止剤",risk:"low",freq:4,desc:"合成酸化防止剤。ADI 0.3 mg/kg体重/日（JECFA）。動物実験での影響が報告されているが使用基準内ではリスクは低いと評価。",c:["動物実験での肝臓・肺への影響（高用量）","ADI: 0.3 mg/kg体重/日（JECFA）"],src:["JECFA評価","食品添加物公定書第10版"],food:["食用油脂","バター","即席麺"]},
-  {id:"sucralose",name:"スクラロース",em:"🩵",cat:"甘味料",risk:"low",freq:6,desc:"有機塩素化合物の甘味料。ほぼ未代謝で排泄。近年、腸内細菌叢への影響を示す研究が発表されており継続評価中。",c:["腸内細菌叢への影響（研究段階）","高温調理での分解産物生成の可能性","ADI: 15 mg/kg体重/日（JECFA）"],src:["JECFA評価","EFSA評価 (2017)"],food:["清涼飲料水","菓子","デザート"]},
-  {id:"propylene_glycol",name:"プロピレングリコール",em:"🔷",cat:"保湿剤・乳化剤",risk:"low",freq:4,desc:"食品の保湿・溶媒として使用。JECFAはADI 25 mg/kg体重/日を設定。通常使用量での安全性が確認されている。",c:["乳幼児での代謝が遅い","ADI: 25 mg/kg体重/日（JECFA）"],src:["JECFA評価"],food:["ケーキ","デザート","シーズニング"]},
-  {id:"carmine",name:"コチニール色素（カルミン）",em:"🍷",cat:"天然着色料",risk:"low",freq:3,desc:"カイガラムシ由来の天然赤色着色料。一部の個人でアナフィラキシーを含むアレルギー反応が報告されており、米国FDAが表示義務を設定。",c:["アレルギー反応（アナフィラキシー含む）の報告","昆虫由来であることへの宗教・食事制限上の問題"],src:["FDA Constituent Update (2011)","JECFA評価"],food:["ジュース","ヨーグルト","菓子","化粧品"]},
-  {id:"stevia",name:"ステビア抽出物",em:"🌱",cat:"甘味料",risk:"low",freq:5,desc:"ステビア植物由来の天然甘味料。JECFAはADI 4 mg/kg体重/日（ステビオール当量）を設定。食品安全委員会も評価済み。",c:["極めて高摂取量でのみ降圧作用の可能性","ADI: 4 mg/kg体重/日（JECFA）"],src:["JECFA評価 (2008)","食品安全委員会"],food:["清涼飲料水","菓子","卓上甘味料"]},
-  {id:"guar_gum",name:"グアーガム",em:"🫛",cat:"増粘安定剤",risk:"low",freq:7,desc:"グアー豆由来の多糖類増粘剤。JECFAはADIを「特定せず」に分類。高用量では消化器症状の報告がある。",c:["高摂取量での消化器症状","まれにアレルギー反応"],src:["JECFA評価"],food:["アイスクリーム","ドレッシング","パン"]},
-  {id:"sodium_erythorbate",name:"エリソルビン酸Na",em:"🟩",cat:"酸化防止剤",risk:"low",freq:6,desc:"ビタミンCの異性体から作られる酸化防止剤。JECFAはADIを「特定せず」に分類。",c:["通常使用量での問題はなし"],src:["JECFA評価"],food:["ハム","ソーセージ","魚介加工品"]},
-  {id:"annatto",name:"アナトー色素",em:"🟧",cat:"天然着色料",risk:"low",freq:4,desc:"アナトーの種から抽出される天然着色料。JECFAはADI 0.065 mg/kg体重/日（ノルビキシン換算）を設定。",c:["ADI: 0.065 mg/kg体重/日（ノルビキシン換算、JECFA）","アレルギー反応の報告（まれ）"],src:["JECFA評価 (2012)"],food:["チーズ","バター","菓子"]}
+  {id:"tartrazine",name:"タール色素（黄色4号）",em:"🟡",cat:"合成着色料",risk:"high",freq:2,
+   mech:"腸管吸収後の代謝産物が神経伝達物質の遊離に影響する可能性が動物実験で示唆されています（EFSA ANS Panel, 2009）。",
+   desc:"石炭タール由来の合成着色料。EUでは子どもへの影響に関する注意表示義務あり（規則EC No.1333/2008）。",c:["過活動症との関連（EFSA 2008年評価）","アレルギー反応（アスピリン感受性者）","ADI: 7.5 mg/kg体重/日（JECFA設定）"],src:["食品安全委員会 添加物評価書","EFSA ANS Panel (2009)"],food:["菓子","清涼飲料水","漬物"]},
+  {id:"sunset_yellow",name:"タール色素（黄色5号）",em:"🧡",cat:"合成着色料",risk:"high",freq:2,
+   mech:"腸内細菌によりアゾ基が還元分解され、芳香族アミンが生成される可能性が報告されています（EFSA ANS Panel, 2009）。",
+   desc:"サンセットイエローFCF。EU規制では6種合成色素の1つとして子どもの多動との関連が示唆され表示義務あり。",c:["過活動との関連（McCann et al. 2007, Lancet）","アレルギー反応","ADI: 4 mg/kg体重/日（JECFA）"],src:["Lancet 2007;370:1560-1567","EFSA評価書"],food:["菓子","清涼飲料水"]},
+  {id:"sodium_nitrite",name:"亜硝酸Na（亜硝酸ナトリウム）",em:"🔴",cat:"発色剤",risk:"high",freq:5,
+   mech:"体内でアミン類と反応してニトロソアミンを生成し、DNA損傷を引き起こす可能性が報告されています（IARC Monographs Vol.94）。ビタミンCとの共存でもニトロソ化が促進されると報告されています（WHO, 2005）。",
+   desc:"ハム・ソーセージなどの発色とボツリヌス菌抑制に使用。IARCはニトロソアミン類をグループ2Aに分類。",c:["ニトロソアミン生成の可能性（IARC分類）","乳幼児のメトヘモグロビン血症リスク","使用基準: 食肉製品70mg/kg以下（日本）"],src:["IARC Monographs Vol.94","食品添加物公定書第10版"],food:["ハム","ソーセージ","ベーコン","魚肉練製品"]},
+  {id:"saccharin",name:"サッカリンNa",em:"🍬",cat:"甘味料",risk:"high",freq:3,
+   mech:"高用量で腸内細菌叢の変化および膀胱上皮への刺激が動物実験で報告されています（JECFA, 2017）。",
+   desc:"人工甘味料。過去に膀胱がんとの関連報告。現在のJECFA評価では使用量基準内で許容。高摂取量での影響は継続評価中。",c:["動物実験での膀胱がん報告（高用量）","ADI: 5 mg/kg体重/日（JECFA）","乳幼児・妊婦での使用は避けることを推奨"],src:["JECFA評価 (2017)","食品安全委員会評価書"],food:["清涼飲料水","菓子","漬物"]},
+  {id:"bha",name:"BHA（ブチルヒドロキシアニソール）",em:"🟠",cat:"酸化防止剤",risk:"high",freq:2,
+   mech:"肝臓のシトクロームP450酵素を誘導し、エストロゲン様作用が細胞実験で示唆されています（IARC Monographs Vol.40）。",
+   desc:"油脂の酸化防止に使用される合成酸化防止剤。IARCはグループ2B（ヒトへの発がん性の可能性）に分類。",c:["IARCグループ2B（ヒトへの発がん性の可能性）","動物実験での前胃腫瘍","ADI: 0.5 mg/kg体重/日（JECFA）"],src:["IARC Monographs Vol.40","食品添加物公定書第10版"],food:["バター","チューインガム","食用油脂"]},
+  {id:"aspartame",name:"アスパルテーム",em:"💜",cat:"甘味料",risk:"mid",freq:8,
+   mech:"体内でフェニルアラニン・アスパラギン酸・メタノールに分解されます。PKU患者では神経毒性が生じる可能性が報告されています（FDA）。IARCは2023年にグループ2Bに分類しています（IARC, 2023）。",
+   desc:"フェニルアラニンを含む人工甘味料。PKU患者は摂取禁忌。2023年IARCがグループ2B分類。JECFAはADIを維持（40mg/kg体重/日）。",c:["PKU患者には禁忌（フェニルアラニン含有）","IARCグループ2B分類（2023年）","ADI: 40 mg/kg体重/日（JECFA維持）"],src:["IARC Monographs (2023)","JECFA評価 (2023)"],food:["清涼飲料水","ガム","デザート","卓上甘味料"]},
+  {id:"msg",name:"グルタミン酸Na（MSG）",em:"🧂",cat:"調味料",risk:"mid",freq:9,
+   mech:"グルタミン酸受容体を介して興奮性神経伝達を活性化します。一部の個人で過剰摂取時に症状が報告されています（FDA, 1995）。",
+   desc:"うま味調味料として広く使用。JECFAはADIを「特定せず」と評価。一部の個人でMSG過敏症の報告がある。",c:["MSG過敏症（一部の個人）：頭痛・紅潮","高摂取時の過食誘発の可能性","JECFAは通常量での安全性を認定"],src:["JECFA評価 (1988)","食品安全委員会"],food:["加工食品全般","スナック","インスタント麺"]},
+  {id:"carrageenan",name:"カラギーナン",em:"🟤",cat:"増粘安定剤",risk:"mid",freq:6,
+   mech:"腸管上皮細胞のToll様受容体を活性化し、炎症性サイトカインの産生を促進する可能性が細胞実験で報告されています（Bhattacharyya, 2012）。",
+   desc:"海藻由来の増粘剤。動物実験での腸管炎症が報告されているが、食品グレードと実験用分解型は品質が異なる。",c:["動物実験での腸管炎症（高用量・分解型）","炎症性腸疾患患者への影響の可能性","食品グレードはJECFAが使用許可維持"],src:["IARC Monographs Vol.31","JECFA評価"],food:["乳製品","ゼリー","ドレッシング","ハム"]},
+  {id:"acesulfame_k",name:"アセスルファムK",em:"💛",cat:"甘味料",risk:"mid",freq:7,
+   mech:"甘味受容体を介したインスリン分泌刺激の可能性が一部の研究で報告されています（Romo-Romo, 2016）。",
+   desc:"ノンカロリー人工甘味料。動物実験では甲状腺・肝臓への影響が報告されているが、通常摂取量での有害性は未確立。",c:["動物実験での甲状腺・肝臓影響（高用量）","腸内細菌叢への影響（研究段階）","ADI: 15 mg/kg体重/日（JECFA）"],src:["JECFA評価","EFSA評価 (2000)"],food:["清涼飲料水","菓子","デザート"]},
+  {id:"tbhq",name:"TBHQ（ターシャリブチルヒドロキノン）",em:"🟥",cat:"酸化防止剤",risk:"mid",freq:3,
+   mech:"キノン骨格が細胞内グルタチオンと反応し、酸化的ストレスを誘発する可能性が細胞実験で報告されています（Gharavi, 2007）。",
+   desc:"油脂食品の酸化防止剤。動物実験での前胃腫瘍・DNA損傷が報告。JECFAは使用基準内での安全性を認定。",c:["動物実験での前胃腫瘍・DNA損傷","ADI: 0.7 mg/kg体重/日（JECFA）","日本では一部用途に使用基準設定"],src:["JECFA評価","食品添加物公定書第10版"],food:["即席麺","ポテトチップス","植物油脂"]},
+  {id:"sodium_benzoate",name:"安息香酸Na",em:"🔵",cat:"保存料",risk:"mid",freq:5,
+   mech:"ビタミンCの存在下でベンゼン（IARCグループ1）が生成される可能性が報告されています（WHO, 2005）。ミトコンドリアDNAへの影響も細胞実験で示唆されています（Piper, 1999）。",
+   desc:"清涼飲料水などの防腐剤。ビタミンCと共存するとベンゼン（発がん性物質）を生成することが報告されている。",c:["ビタミンCとの共存でベンゼン生成の可能性","子どもの過活動との関連（McCann 2007）","ADI: 5 mg/kg体重/日（JECFA）"],src:["WHO Water Sanitation Health (2005)","食品安全委員会評価書"],food:["清涼飲料水","果汁飲料","醤油"]},
+  {id:"red40",name:"タール色素（赤色40号）",em:"❤️",cat:"合成着色料",risk:"mid",freq:3,
+   mech:"アゾ染料の代謝産物が腸内細菌と相互作用し、炎症反応を促進する可能性が報告されています（McCann, 2007）。",
+   desc:"合成赤色着色料。EUの6種合成色素の1つとして子どもの多動との関連が報告。日本でも食品安全委員会が評価実施済み。",c:["子どもの多動との関連（McCann 2007）","ADI: 7 mg/kg体重/日（JECFA）","アレルギー反応の報告"],src:["Lancet 2007","EFSA評価"],food:["菓子","清涼飲料水","漬物"]},
+  {id:"phosphate",name:"リン酸塩類",em:"🔶",cat:"結着剤・pH調整剤",risk:"mid",freq:9,
+   mech:"腸管からの無機リン吸収を促進し、PTH（副甲状腺ホルモン）分泌を刺激することで血管石灰化に関与する可能性が報告されています（Ritz, 2012）。",
+   desc:"多種のリン酸塩が食品添加物として使用される。腎臓病患者では血管石灰化・死亡リスクとの関連が報告されている。",c:["腎疾患患者での高リン血症リスク","カルシウム吸収阻害（高摂取量）","血管石灰化との関連（腎疾患患者）"],src:["KDIGO CKD-MBD Guideline","食品安全委員会"],food:["ハム","ソーセージ","チーズ","インスタント麺"]},
+  {id:"potassium_sorbate",name:"ソルビン酸K",em:"🟢",cat:"保存料",risk:"mid",freq:7,
+   mech:"細胞膜への作用および亜硝酸塩との反応物の変異原性が試験管内実験で報告されています（Mamur, 2010）。",
+   desc:"広く使用される保存料。JECFA評価では一般的な摂取量での安全性を認定。亜硝酸塩との反応物の変異原性が試験管内で報告されているが食品中での意義は不明。",c:["亜硝酸塩との反応物の変異原性（試験管内）","アレルギー反応の報告（まれ）","ADI: 25 mg/kg体重/日（JECFA）"],src:["JECFA評価","食品安全委員会"],food:["チーズ","清涼飲料水","果実加工品","菓子"]},
+  {id:"red3",name:"タール色素（赤色3号）",em:"🍒",cat:"合成着色料",risk:"mid",freq:2,
+   mech:"甲状腺ペルオキシダーゼを阻害し、チロシンのヨウ素化を妨げることで甲状腺ホルモン合成を低下させる可能性が動物実験で報告されています（FDA, 2024）。",
+   desc:"エリスロシン。米国FDAは2024年1月に食肉・缶詰以外への使用禁止を決定（動物実験での甲状腺腫瘍による）。",c:["FDAが2024年に禁止（食肉・缶詰製品を除く）","動物実験での甲状腺腫瘍","ADI: 0.1 mg/kg体重/日（JECFA）"],src:["FDA 2024年1月決定","JECFA評価"],food:["菓子","清涼飲料水","漬物"]},
+  {id:"vitamin_c",name:"ビタミンC（L-アスコルビン酸）",em:"🍊",cat:"酸化防止剤",risk:"low",freq:9,
+   mech:"活性酸素種を直接還元することで酸化的ストレスを軽減します。コラーゲン合成にも必須の役割を持つことが広く確認されています（Padayatty, 2003）。亜硝酸NaまたはビタミンCとの共存下ではベンゼン・ニトロソアミンが生成される可能性が報告されています（WHO, 2005）。",
+   desc:"天然由来の酸化防止剤。JECFAはADIを「特定せず」に分類。食品添加物としての使用量は安全範囲内。",c:["極端な過剰摂取での下痢・腎結石（食品添加物量では問題なし）"],src:["JECFA評価"],food:["幅広い加工食品","飲料"]},
+  {id:"lecithin",name:"レシチン（大豆・卵黄）",em:"🫘",cat:"乳化剤",risk:"low",freq:9,
+   mech:"細胞膜リン脂質の構成成分として機能し、脂質の乳化を助けます。コリンの供給源でもあることが報告されています（Zeisel, 2006）。",
+   desc:"天然由来の乳化剤。JECFAはADIを「特定せず」に分類。大豆アレルギーの方は大豆レシチン含有製品に注意。",c:["大豆アレルギー患者での反応（大豆レシチン）"],src:["JECFA評価"],food:["チョコレート","マーガリン","アイスクリーム","パン"]},
+  {id:"caramel",name:"カラメル色素",em:"🟫",cat:"着色料",risk:"low",freq:9,
+   mech:"カラメルIV中の4-メチルイミダゾール（4-MEI）が肺腫瘍との関連を示す可能性が動物実験で報告されています（IARC, 2012）。通常使用量でJECFAは問題なしと評価しています。",
+   desc:"糖質の加熱により製造される褐色着色料。カラメルIVに含まれる4-MEIについてIARCがグループ2B分類。通常使用量でJECFAは問題なしと評価。",c:["カラメルIVに含まれる4-MEI（IARCグループ2B）","ADI: 200 mg/kg体重/日（カラメルIV、JECFA）"],src:["IARC (2012)","JECFA評価"],food:["コーラ","醤油","ソース","菓子"]},
+  {id:"glycine",name:"グリシン",em:"💚",cat:"調味料・保存料",risk:"low",freq:6,
+   mech:"抑制性神経伝達物質として中枢神経系で機能しますが、食品添加物としての使用量では影響は示されていません（JECFA評価）。",
+   desc:"アミノ酸の一種。甘味・保存効果のために使用。JECFAはADIを「特定せず」に分類。人体の構成成分でもある。",c:["通常の食品使用量での問題はなし"],src:["JECFA評価"],food:["弁当","惣菜","練り製品"]},
+  {id:"tocopherol",name:"ビタミンE（トコフェロール）",em:"🌿",cat:"酸化防止剤",risk:"low",freq:7,
+   mech:"脂質過酸化の連鎖反応を断ち切ることで、細胞膜の酸化ダメージを防ぐ働きが広く確認されています（Traber, 2007）。",
+   desc:"天然由来の酸化防止剤。JECFAはADIを「特定せず」に分類。食品添加物としての使用量は安全範囲内。",c:["通常の食品使用量での問題はなし"],src:["JECFA評価"],food:["油脂製品","マーガリン","乳製品"]},
+  {id:"citric_acid",name:"クエン酸",em:"🍋",cat:"酸味料・保存料",risk:"low",freq:9,
+   mech:"カルシウムとキレート結合し、歯のエナメル質溶解を促進する可能性が報告されています（Lussi, 2004）。食品添加物としての使用量では問題ないと評価されています。",
+   desc:"果実などに天然に存在する有機酸。JECFAはADIを「特定せず」に分類。極端な過剰摂取では歯のエナメル質への影響があるが食品添加物量では問題なし。",c:["極端な過剰摂取での歯のエナメル質への影響"],src:["JECFA評価"],food:["幅広い加工食品"]},
+  {id:"xanthan",name:"キサンタンガム",em:"🌊",cat:"増粘安定剤",risk:"low",freq:7,
+   mech:"腸内細菌により部分的に発酵分解され、腸内環境への影響が研究されていますが、通常量での影響は小さいとJECFAが評価しています。",
+   desc:"微生物産生の多糖類。JECFAはADIを「特定せず」に分類。ごく一部の個人でアレルギー反応の報告がある。",c:["ごく一部での消化器症状（高摂取量）"],src:["JECFA評価"],food:["ドレッシング","ジュース","アイスクリーム"]},
+  {id:"bht",name:"BHT（ジブチルヒドロキシトルエン）",em:"🌕",cat:"酸化防止剤",risk:"low",freq:4,
+   mech:"肝臓シトクロームP450の誘導および脂質過酸化抑制作用が報告されています。高用量での肺腫瘍との関連が動物実験で示唆されています（JECFA評価）。",
+   desc:"合成酸化防止剤。ADI 0.3 mg/kg体重/日（JECFA）。動物実験での影響が報告されているが使用基準内ではリスクは低いと評価。",c:["動物実験での肝臓・肺への影響（高用量）","ADI: 0.3 mg/kg体重/日（JECFA）"],src:["JECFA評価","食品添加物公定書第10版"],food:["食用油脂","バター","即席麺"]},
+  {id:"sucralose",name:"スクラロース",em:"🩵",cat:"甘味料",risk:"low",freq:6,
+   mech:"腸内細菌叢の構成を変化させる可能性が一部の研究で示唆されています（Abou-Donia, 2008）。高温調理での分解産物生成の可能性も報告されています。",
+   desc:"有機塩素化合物の甘味料。ほぼ未代謝で排泄。近年、腸内細菌叢への影響を示す研究が発表されており継続評価中。",c:["腸内細菌叢への影響（研究段階）","高温調理での分解産物生成の可能性","ADI: 15 mg/kg体重/日（JECFA）"],src:["JECFA評価","EFSA評価 (2017)"],food:["清涼飲料水","菓子","デザート"]},
+  {id:"propylene_glycol",name:"プロピレングリコール",em:"🔷",cat:"保湿剤・乳化剤",risk:"low",freq:4,
+   mech:"ピルビン酸・乳酸に代謝されエネルギーとして利用されます。過剰摂取では乳酸アシドーシスの可能性が報告されていますが、通常量では問題ないとJECFAが評価しています。",
+   desc:"食品の保湿・溶媒として使用。JECFAはADI 25 mg/kg体重/日を設定。通常使用量での安全性が確認されている。",c:["乳幼児での代謝が遅い","ADI: 25 mg/kg体重/日（JECFA）"],src:["JECFA評価"],food:["ケーキ","デザート","シーズニング"]},
+  {id:"carmine",name:"コチニール色素（カルミン）",em:"🍷",cat:"天然着色料",risk:"low",freq:3,
+   mech:"カルミン酸-タンパク質複合体がIgE媒介アレルギー反応の原因物質となる可能性が報告されています（FDA, 2011）。アナフィラキシーの症例も報告されています。",
+   desc:"カイガラムシ由来の天然赤色着色料。一部の個人でアナフィラキシーを含むアレルギー反応が報告されており、米国FDAが表示義務を設定。",c:["アレルギー反応（アナフィラキシー含む）の報告","昆虫由来であることへの宗教・食事制限上の問題"],src:["FDA Constituent Update (2011)","JECFA評価"],food:["ジュース","ヨーグルト","菓子","化粧品"]},
+  {id:"stevia",name:"ステビア抽出物",em:"🌱",cat:"甘味料",risk:"low",freq:5,
+   mech:"腸内細菌によりステビオールグリコシドが加水分解され、ステビオールとして肝臓で代謝後に排泄されることが報告されています（JECFA, 2008）。",
+   desc:"ステビア植物由来の天然甘味料。JECFAはADI 4 mg/kg体重/日（ステビオール当量）を設定。食品安全委員会も評価済み。",c:["極めて高摂取量でのみ降圧作用の可能性","ADI: 4 mg/kg体重/日（JECFA）"],src:["JECFA評価 (2008)","食品安全委員会"],food:["清涼飲料水","菓子","卓上甘味料"]},
+  {id:"guar_gum",name:"グアーガム",em:"🫛",cat:"増粘安定剤",risk:"low",freq:7,
+   mech:"消化管内で高粘性ゲルを形成し、糖質・脂質の吸収を遅延させる可能性が報告されています（Blackburn, 1984）。高摂取量では消化器症状が生じる場合があります。",
+   desc:"グアー豆由来の多糖類増粘剤。JECFAはADIを「特定せず」に分類。高用量では消化器症状の報告がある。",c:["高摂取量での消化器症状","まれにアレルギー反応"],src:["JECFA評価"],food:["アイスクリーム","ドレッシング","パン"]},
+  {id:"sodium_erythorbate",name:"エリソルビン酸Na",em:"🟩",cat:"酸化防止剤",risk:"low",freq:6,
+   mech:"L-アスコルビン酸と同様に活性酸素を還元しますが、ビタミンCとしての生物活性は低いと評価されています（JECFA評価）。",
+   desc:"ビタミンCの異性体から作られる酸化防止剤。JECFAはADIを「特定せず」に分類。",c:["通常使用量での問題はなし"],src:["JECFA評価"],food:["ハム","ソーセージ","魚介加工品"]},
+  {id:"annatto",name:"アナトー色素",em:"🟧",cat:"天然着色料",risk:"low",freq:4,
+   mech:"ノルビキシンとして吸収後、肝臓でグルクロン酸抱合を受けて代謝・排泄されることが報告されています（JECFA, 2012）。",
+   desc:"アナトーの種から抽出される天然着色料。JECFAはADI 0.065 mg/kg体重/日（ノルビキシン換算）を設定。",c:["ADI: 0.065 mg/kg体重/日（ノルビキシン換算、JECFA）","アレルギー反応の報告（まれ）"],src:["JECFA評価 (2012)"],food:["チーズ","バター","菓子"]}
 ];
 
 var ACH=[
@@ -349,17 +461,18 @@ var ST={
   col:JSON.parse(localStorage.getItem("adx4_col")||"{}"),
   sc:parseInt(localStorage.getItem("adx4_sc")||"0"),
   ach:JSON.parse(localStorage.getItem("adx4_ach")||"[]"),
-  cf:"all"
+  cf:"all",
+  prof:JSON.parse(localStorage.getItem("adx4_prof")||'{"conditions":[],"allergies":[],"pregnant":false,"nursing":false,"child":false}')
 };
 
 function save(){
   localStorage.setItem("adx4_col",JSON.stringify(ST.col));
   localStorage.setItem("adx4_sc",String(ST.sc));
   localStorage.setItem("adx4_ach",JSON.stringify(ST.ach));
+  localStorage.setItem("adx4_prof",JSON.stringify(ST.prof));
   document.getElementById("hScan").textContent=ST.sc;
   document.getElementById("hColl").textContent=Object.keys(ST.col).length;
 }
-
 
 // ── ナビゲーション ──
 function showPage(p){
@@ -373,14 +486,15 @@ function showPage(p){
   if(p==="dex")renderDex();
   if(p==="ach")renderAch();
   if(p==="data")renderData();
+  if(p==="prof")renderProf();
 }
 
-// navボタン：touchstartで即反応（iOSのclickの300ms遅延を回避）
 var navBtns=[
   {id:"nb-scan",page:"scan"},
   {id:"nb-dex",page:"dex"},
   {id:"nb-ach",page:"ach"},
-  {id:"nb-data",page:"data"}
+  {id:"nb-data",page:"data"},
+  {id:"nb-prof",page:"prof"}
 ];
 navBtns.forEach(function(nb){
   var el=document.getElementById(nb.id);
@@ -438,7 +552,6 @@ function loadImg(f){
       document.getElementById("resWrap").style.display="none";
     };
     img.onerror=function(){
-      // フォールバック：元データをそのまま使用
       prevImg.src=dataUrl;
       imgB64=dataUrl.split(",").pop();
       scanLabel.style.display="none";
@@ -462,6 +575,70 @@ function resetScan(){
 document.getElementById("btnReset").addEventListener("click",resetScan);
 document.getElementById("btnRescan").addEventListener("click",resetScan);
 document.getElementById("btnDex").addEventListener("click",function(){showPage("dex")});
+
+// ── パーソナライズ警告データ ──
+var PROF_WARN={
+  conditions:{
+    kidney:{ids:["phosphate","potassium_sorbate"],msgs:{
+      phosphate:"腎機能が低下していると無機リンの過剰蓄積で高リン血症・血管石灰化リスクが高まると報告されています（KDIGO CKD-MBD Guideline, 2017）。",
+      potassium_sorbate:"腎機能低下時はカリウム排泄が減少するため、カリウム含有添加物の摂取過多に注意が呼びかけられています（厚生労働省）。"
+    }},
+    diabetes:{ids:["aspartame","acesulfame_k","saccharin","sucralose"],msgs:{
+      aspartame:"腸内ホルモンを介してインスリン感受性に影響する可能性が一部の研究で示唆されています（Romo-Romo, 2018）。",
+      acesulfame_k:"甘味受容体を介したインスリン分泌刺激の可能性が一部の研究で報告されています（Romo-Romo, 2016）。",
+      saccharin:"長期摂取と耐糖能低下の関連が一部の観察研究で報告されています（Suez, 2014）。",
+      sucralose:"腸内細菌叢変化を介したグルコース代謝への影響が一部の研究で示唆されています（Abou-Donia, 2008）。"
+    }},
+    hypertension:{ids:["msg","sodium_nitrite","sodium_benzoate"],msgs:{
+      msg:"ナトリウムを含むため、血圧管理中の方はナトリウム摂取量の一部として計算することが推奨されています（WHO）。",
+      sodium_nitrite:"ナトリウム塩として血圧に影響する可能性があり、塩分制限が必要な方は摂取量への注意が呼びかけられています（厚生労働省）。",
+      sodium_benzoate:"ナトリウム塩として塩分制限が必要な高血圧の方は摂取量への注意が推奨されています。"
+    }}
+  },
+  allergies:{
+    soy:{ids:["lecithin"],msgs:{lecithin:"大豆レシチンには微量の大豆タンパク質が残存する場合があり、重篤な大豆アレルギーの方は反応が起こる可能性が報告されています（FDA, 2006）。"}},
+    egg:{ids:["lecithin"],msgs:{lecithin:"卵黄由来のレシチンが含まれる製品では、卵アレルギーの方に反応が生じる可能性があります（厚生労働省 アレルギー物質表示）。"}},
+    wheat:{ids:[],msgs:{}}
+  },
+  pregnant:{
+    ids:["sodium_nitrite","saccharin","aspartame","bha","red3"],
+    msgs:{
+      sodium_nitrite:"妊娠中の亜硝酸ナトリウム摂取は胎児のメトヘモグロビン血症リスクと関連すると一部で報告されています（厚生労働省）。",
+      saccharin:"胎盤を通過し胎児に蓄積する可能性があり、妊娠中の摂取を控えることを推奨する機関があります（JECFA, 2017）。",
+      aspartame:"代謝産物フェニルアラニンが胎児の神経発達に影響する可能性が示唆されており、特にPKU保因者は注意が必要とされています（FDA）。",
+      bha:"動物実験で生殖毒性が示唆されており、妊娠中の過剰摂取への注意が呼びかけられています（IARC Monographs Vol.40）。",
+      red3:"甲状腺ホルモン合成への干渉が動物実験で報告されており、妊娠中の甲状腺機能への影響が懸念されています（FDA, 2024）。"
+    }
+  },
+  nursing:{
+    ids:["sodium_nitrite","saccharin","aspartame"],
+    msgs:{
+      sodium_nitrite:"母乳を介した乳児への移行が懸念され、過剰摂取への注意が呼びかけられています（厚生労働省）。",
+      saccharin:"母乳中への移行が報告されており、授乳中の過剰摂取を避けることが推奨されています。",
+      aspartame:"代謝産物フェニルアラニンが母乳中に移行する可能性があり、授乳中の摂取制限を推奨する意見があります（FDA）。"
+    }
+  },
+  child:{
+    ids:["tartrazine","sunset_yellow","red40","red3","sodium_nitrite","saccharin","aspartame"],
+    msgs:{
+      tartrazine:"子どもの多動との関連が報告されており、EUでは子ども向け食品に「子どもの活動・注意力に影響する場合があります」の警告表示が義務付けられています（EFSA, 2008；McCann, 2007）。",
+      sunset_yellow:"子どもの多動との関連がLancet誌に報告されており、EUでは警告表示が義務付けられています（McCann, 2007）。",
+      red40:"子どもの多動との関連が報告されており、EUの6種警告色素の一つに指定されています（McCann, 2007）。",
+      red3:"甲状腺への影響が動物実験で報告されており、成長期の子どもへの影響を懸念する研究があります（FDA, 2024）。",
+      sodium_nitrite:"乳幼児はメトヘモグロビン血症のリスクが成人より高いとされており、摂取量への注意が呼びかけられています（厚生労働省）。",
+      saccharin:"子どもへの長期影響データが限られているため、過剰摂取を避けることが推奨されています（JECFA）。",
+      aspartame:"PKUの子どもには禁忌であり、フェニルアラニン摂取管理が必要です（FDA）。"
+    }
+  }
+};
+
+// ── コンボ警告データ ──
+var COMBOS=[
+  {ids:["sodium_nitrite","vitamin_c"],icon:"⚗️",title:"コンボ警告：ニトロソアミン生成リスク",
+   msg:"亜硝酸NaとビタミンCが同時に検出されました。酸性条件下でニトロソアミン（発がん性物質）が生成される可能性が報告されています（IARC Monographs Vol.94；WHO, 2005）。"},
+  {ids:["sodium_benzoate","vitamin_c"],icon:"⚗️",title:"コンボ警告：ベンゼン生成リスク",
+   msg:"安息香酸NaとビタミンCが同時に検出されました。光・熱の存在下でベンゼン（IARCグループ1：ヒトへの発がん性あり）が生成される可能性が報告されています（WHO Water Sanitation Health, 2005）。"}
+];
 
 // ── 解析 ──
 document.getElementById("btnAnalyze").addEventListener("click",function(){
@@ -543,6 +720,54 @@ function showResults(result){
   fill.className="pf pf"+rc;
   setTimeout(function(){fill.style.width=score+"%"},100);
   document.getElementById("rsT").textContent=rl+" — "+score+"/100";
+
+  // ── 警告表示 ──
+  var detectedIds=detected.map(function(a){return a.id});
+  var warnWrap=document.getElementById("warnWrap");
+  warnWrap.innerHTML="";
+
+  // コンボ警告
+  COMBOS.forEach(function(combo){
+    if(combo.ids.every(function(id){return detectedIds.indexOf(id)>=0})){
+      var d=document.createElement("div");
+      d.className="combo-card";
+      d.innerHTML='<div class="combo-hd">'+combo.icon+" "+combo.title+'</div><div class="warn-body">'+combo.msg+"</div>";
+      warnWrap.appendChild(d);
+    }
+  });
+
+  // パーソナライズ警告（重複なし）
+  var shown={};
+  function addWarn(id,msg){
+    if(shown[id])return;
+    shown[id]=true;
+    var a=DB.find(function(x){return x.id===id});
+    if(!a)return;
+    var d=document.createElement("div");
+    d.className="warn-card";
+    d.innerHTML='<div class="warn-hd">⚠️ あなたへの注意：'+a.name+'</div><div class="warn-body">'+msg+"</div>";
+    warnWrap.appendChild(d);
+  }
+
+  ST.prof.conditions.forEach(function(cond){
+    var w=PROF_WARN.conditions[cond];
+    if(!w)return;
+    w.ids.forEach(function(id){if(detectedIds.indexOf(id)>=0)addWarn(id,w.msgs[id]);});
+  });
+  ST.prof.allergies.forEach(function(al){
+    var w=PROF_WARN.allergies[al];
+    if(!w)return;
+    w.ids.forEach(function(id){if(detectedIds.indexOf(id)>=0)addWarn(id,w.msgs[id]);});
+  });
+  if(ST.prof.pregnant){
+    PROF_WARN.pregnant.ids.forEach(function(id){if(detectedIds.indexOf(id)>=0)addWarn(id,PROF_WARN.pregnant.msgs[id]);});
+  }
+  if(ST.prof.nursing){
+    PROF_WARN.nursing.ids.forEach(function(id){if(detectedIds.indexOf(id)>=0)addWarn(id,PROF_WARN.nursing.msgs[id]);});
+  }
+  if(ST.prof.child){
+    PROF_WARN.child.ids.forEach(function(id){if(detectedIds.indexOf(id)>=0)addWarn(id,PROF_WARN.child.msgs[id]);});
+  }
 
   var list=document.getElementById("adList");
   list.innerHTML="";
@@ -695,6 +920,7 @@ function showDetail(a){
   var rar=gr(a.freq);
   var cs=a.c.map(function(c){return'<div class="co"><span class="cd">•</span><span>'+c+"</span></div>"}).join("");
   var fs=a.food.map(function(f){return'<span class="ftg">'+f+"</span>"}).join("");
+  var mechHtml=a.mech?'<div class="mech-lbl">体内メカニズム</div><div class="mech-box">'+a.mech+"</div>":'';
   document.getElementById("mbd").innerHTML=
     '<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">'+
       '<div style="font-size:36px">'+a.em+"</div>"+
@@ -712,6 +938,7 @@ function showDetail(a){
       '<div class="msc"><div class="mv">'+a.freq+"/10</div><div class=\"ml\">使用頻度スコア</div></div>"+
     "</div>"+
     '<p style="font-size:13px;line-height:1.7;color:var(--dim);margin-bottom:12px">'+a.desc+"</p>"+
+    mechHtml+
     '<div style="font-size:11px;font-weight:700;color:var(--dim);margin-bottom:8px">注意事項</div>'+
     cs+
     '<div style="font-size:11px;font-weight:700;color:var(--dim);margin:12px 0 8px">主な使用食品</div>'+
@@ -727,9 +954,52 @@ document.getElementById("mbg").addEventListener("click",function(e){
   if(e.target===this)this.classList.remove("o");
 });
 
+// ── PROFILE ──
+function renderProf(){
+  document.querySelectorAll("#po-cond .prof-opt").forEach(function(btn){
+    btn.classList.toggle("on",ST.prof.conditions.indexOf(btn.dataset.val)>=0);
+  });
+  document.querySelectorAll("#po-allergy .prof-opt").forEach(function(btn){
+    btn.classList.toggle("on",ST.prof.allergies.indexOf(btn.dataset.val)>=0);
+  });
+  document.querySelectorAll("#po-flags .prof-opt").forEach(function(btn){
+    btn.classList.toggle("on",ST.prof[btn.dataset.val]===true);
+  });
+}
+
+document.querySelectorAll("#po-cond .prof-opt").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var v=this.dataset.val;
+    var idx=ST.prof.conditions.indexOf(v);
+    if(idx>=0)ST.prof.conditions.splice(idx,1);
+    else ST.prof.conditions.push(v);
+    save();renderProf();
+    toast("⚙️","プロフィール更新","スキャン結果に警告が表示されます");
+  });
+});
+document.querySelectorAll("#po-allergy .prof-opt").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var v=this.dataset.val;
+    var idx=ST.prof.allergies.indexOf(v);
+    if(idx>=0)ST.prof.allergies.splice(idx,1);
+    else ST.prof.allergies.push(v);
+    save();renderProf();
+    toast("⚙️","プロフィール更新","スキャン結果に警告が表示されます");
+  });
+});
+document.querySelectorAll("#po-flags .prof-opt").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var v=this.dataset.val;
+    ST.prof[v]=!ST.prof[v];
+    save();renderProf();
+    toast("⚙️","プロフィール更新","スキャン結果に警告が表示されます");
+  });
+});
+
 // Init
 save();
 renderData();
+renderProf();
 </script>
 </body>
 </html>
