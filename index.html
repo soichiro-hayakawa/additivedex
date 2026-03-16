@@ -292,8 +292,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <!-- DATA -->
 <div class="pg" id="pg-data">
   <div class="dbi">
-    <h3>添加物データベース v2.3</h3>
-    <p>最終更新: 2025年3月10日 ｜ 収録: 30種<br>出典: 食品添加物公定書第10版 / 厚生労働省告示 / JECFA / IARC</p>
+    <h3>添加物データベース v3.0</h3>
+    <p>最終更新: 2026年3月17日 ｜ 収録: <span id="dbCount">0</span>種<br>出典: 食品添加物公定書第10版 / 厚生労働省告示 / JECFA / IARC / EFSA / FDA</p>
   </div>
   <div class="stl">高リスク</div><div class="dcard" id="dH"></div>
   <div class="stl">中リスク</div><div class="dcard" id="dM"></div>
@@ -1073,7 +1073,7 @@ var ACH=[
   {id:"first_add",name:"はじめての発見",desc:"添加物を初めて取得",icon:"✨",cond:function(s){return Object.keys(s.col).length>=1}},
   {id:"collect_5",name:"コレクター見習い",desc:"5種類の添加物を取得",icon:"🗂️",cond:function(s){return Object.keys(s.col).length>=5}},
   {id:"collect_15",name:"コレクター",desc:"15種類の添加物を取得",icon:"📦",cond:function(s){return Object.keys(s.col).length>=15}},
-  {id:"collect_all",name:"コンプリート！",desc:"全30種類を取得",icon:"🏅",cond:function(s){return Object.keys(s.col).length>=30}},
+  {id:"collect_all",name:"コンプリート！",desc:"全種類を取得",icon:"🏅",cond:function(s){return Object.keys(s.col).length>=DB.length}},
   {id:"got_legendary",name:"レジェンダリー取得",desc:"LEGENDARY添加物を発見",icon:"💎",cond:function(s){return DB.filter(function(a){return gr(a.freq)==="lg"}).some(function(a){return s.col[a.id]})}},
   {id:"got_epic",name:"EPIC取得",desc:"EPIC添加物を発見",icon:"🔮",cond:function(s){return DB.filter(function(a){return gr(a.freq)==="ep"}).some(function(a){return s.col[a.id]})}},
   {id:"high_danger",name:"危険察知",desc:"高リスク添加物を3種取得",icon:"⚠️",cond:function(s){return DB.filter(function(a){return a.risk==="high"&&s.col[a.id]}).length>=3}},
@@ -1300,17 +1300,45 @@ document.getElementById("btnAnalyze").addEventListener("click",function(){
   .then(function(data){
     clearInterval(intv);
     document.getElementById("loadWrap").style.display="none";
-    if(data.error)throw new Error(data.error.message);
-    var txt=data.content.map(function(c){return c.text||""}).join("");
-    txt=txt.replace(/```[a-z]*\n?|```/g,"").trim();
-    var result=JSON.parse(txt);
+    if(data.error)throw new Error(data.error.message||data.error.detail||"APIエラー");
+
+    // サーバー側でパース済みの _parsed を優先使用。なければフロントでパース
+    var result=null;
+    if(data._parsed&&typeof data._parsed==="object"){
+      result=data._parsed;
+    }else{
+      var txt=(data.content||[]).map(function(c){return c.text||""}).join("");
+      txt=txt.replace(/```[a-zA-Z]*\n?|```/g,"").trim();
+      try{
+        result=JSON.parse(txt);
+      }catch(pe){
+        // JSON抽出フォールバック
+        var m=txt.match(/\{[\s\S]*\}/);
+        if(m){try{result=JSON.parse(m[0]);}catch(e2){result=null;}}
+      }
+    }
+    if(!result)throw new Error("解析結果のJSONパースに失敗しました");
+
+    // 原材料名が見つからない場合
+    if(result.not_found||result.raw_ingredients==="__NOT_FOUND__"||!result.raw_ingredients){
+      document.getElementById("loadWrap").style.display="none";
+      prevWrap.style.display="block";
+      toast("📷","原材料名が見つかりませんでした","原材料名の部分をアップで撮影してください",true);
+      return;
+    }
+
     showResults(result);
   })
   .catch(function(e){
     clearInterval(intv);
     document.getElementById("loadWrap").style.display="none";
     prevWrap.style.display="block";
-    toast("❌","解析エラー",String(e.message).slice(0,80),true);
+    var msg=String(e.message||e).slice(0,100);
+    if(msg.indexOf("timeout")>=0||msg.indexOf("504")>=0){
+      toast("⏱️","解析タイムアウト","もう一度お試しください",true);
+    }else{
+      toast("❌","解析エラー",msg,true);
+    }
   });
 });
 
@@ -1402,7 +1430,7 @@ function showResults(result){
   var list=document.getElementById("adList");
   list.innerHTML="";
   if(detected.length===0){
-    list.innerHTML='<div class="es"><div class="ei">✅</div><div style="font-size:15px;font-weight:700;color:var(--txt);margin-bottom:6px">検出なし</div><div style="font-size:13px">データベース収録の添加物は含まれていないようです</div></div>';
+    list.innerHTML='<div class="es"><div class="ei">✅</div><div style="font-size:15px;font-weight:700;color:var(--ok);margin-bottom:6px">検出なし</div><div style="font-size:13px">✅ データベース収録の添加物は含まれていません</div></div>';
   }else{
     var sorted=detected.slice().sort(function(a,b){
       var o={high:0,mid:1,low:2};return o[a.risk]-o[b.risk];
@@ -1639,6 +1667,9 @@ document.getElementById("btnProfDone").addEventListener("click",function(){
 save();
 renderData();
 renderProf();
+// DBカウント表示
+var dbCountEl=document.getElementById("dbCount");
+if(dbCountEl)dbCountEl.textContent=DB.length;
 
 // 初回起動ヒント（1回のみ）
 if(!localStorage.getItem("adx4_inited")){
