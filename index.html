@@ -1284,7 +1284,7 @@ document.getElementById("btnAnalyze").addEventListener("click",function(){
     DB.map(function(a){return"- "+a.name+"（id: "+a.id+"）"}).join("\n")+
     "\n\nJSONのみで返答（余計な文字・マークダウン不要）：\n{\"raw_ingredients\":\"テキスト\",\"detected_additives\":[\"id1\"],\"notes\":\"\"}";
 
-  fetch("https://api.additivedex.com/api/chat",{
+  fetch("https://additivedex-api.vercel.app/api/chat",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
